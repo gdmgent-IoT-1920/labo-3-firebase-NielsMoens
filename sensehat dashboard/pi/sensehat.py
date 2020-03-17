@@ -7,7 +7,7 @@ COLLECTION = 'raspberryPi'
 DOCUMENT = 'y4VFQEqTZTvBf6O0pIzV'
 
 # firebase
-cred = credentials.Certificate("/home/pi/code/week5/demoproject/pi/config/iotlabo3-firebase-adminsdk-o5w1i-405d897fbe.json")
+cred = credentials.Certificate("./config/iotlabo3-firebase-adminsdk-o5w1i-405d897fbe.json")
 firebase_admin.initialize_app(cred)
 
 # sensehat 
