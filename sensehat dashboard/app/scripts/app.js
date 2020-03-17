@@ -1,6 +1,6 @@
 const dbConfig = {
-    collection: 'raspberry_collection',
-    document: 'lectorpi_doc'
+    collection: 'raspberryPi',
+    document: 'y4VFQEqTZTvBf6O0pIzV'
 };
 
 const app = {
@@ -14,6 +14,11 @@ const app = {
 
         this._matrix = {
             isOn: false, color: {value: '#000000', type: 'hex'}
+        };
+        this._environment ={
+            temp : 24,
+            hum : 0,
+            pres : 0
         };
     },
     cacheDOMElements() {
@@ -34,7 +39,7 @@ const app = {
         this._db.collection(dbConfig.collection).doc(dbConfig.document)
             .set(
                 {matrix: this._matrix},
-                {merge: true}
+                {merge : true}
             );
     }
 }

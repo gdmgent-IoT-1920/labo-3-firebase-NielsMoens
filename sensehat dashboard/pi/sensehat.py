@@ -2,12 +2,12 @@ from sense_hat import SenseHat
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# constants
-COLLECTION = 'raspberry_collection'
-DOCUMENT = 'lectorpi_doc'
+#const
+COLLECTION = 'raspberryPi'
+DOCUMENT = 'y4VFQEqTZTvBf6O0pIzV'
 
 # firebase
-cred = credentials.Certificate("./config/iotlabo-85706-firebase-adminsdk-wd3oa-d11daf23ba.json")
+cred = credentials.Certificate("/home/pi/code/week5/demoproject/pi/config/iotlabo3-firebase-adminsdk-o5w1i-405d897fbe.json")
 firebase_admin.initialize_app(cred)
 
 # sensehat 
@@ -18,8 +18,16 @@ sense.clear()
 def update_sensehat(doc_snapshot, changes, read_time):
     for doc in doc_snapshot:
         doc_readable = doc.to_dict()
-        print(doc_readable)
 
+        h = doc_readable['matrix']['color']['value']
+        firebaseStatus = doc_readable['matrix']['isOn']
+
+        rgb = tuple(int(h[i:i+2], 16) for i in (0,2,4))
+        
+        if firebaseStatus == True :
+            sense.clear(rgb)
+        else :
+            sense.clear()
 # connect firestore
 db = firestore.client()
 pi_ref = db.collection(COLLECTION).document(DOCUMENT)
