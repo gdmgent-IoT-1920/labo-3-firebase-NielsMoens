@@ -15,10 +15,11 @@ sense = SenseHat()
 sense.set_imu_config(False, False, False)
 sense.clear()
 
+#update snesehat color en convert hex to rgb values
 def update_sensehat(doc_snapshot, changes, read_time):
     for doc in doc_snapshot:
         doc_readable = doc.to_dict()
-
+        
         h = doc_readable['matrix']['color']['value']
         firebaseStatus = doc_readable['matrix']['isOn']
 
@@ -28,6 +29,7 @@ def update_sensehat(doc_snapshot, changes, read_time):
             sense.clear(rgb)
         else :
             sense.clear()
+
 # connect firestore
 db = firestore.client()
 pi_ref = db.collection(COLLECTION).document(DOCUMENT)
